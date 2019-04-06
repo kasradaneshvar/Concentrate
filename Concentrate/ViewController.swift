@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     // MARK: Model
-    var game: Concentrate = Concentrate(numberOfPairsOfCards: 4)
+    lazy var game: Concentrate = Concentrate(numberOfPairsOfCards: cardButtons.count / 2)
     
     // MARK: Properties
     @IBOutlet var cardButtons: [UIButton]!
