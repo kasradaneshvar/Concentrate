@@ -15,6 +15,11 @@ class Concentrate {
     
     // MARK: Methods
     func chooseCard(at index: Int) {
+        if cards[index].isFaceUp {
+            cards[index].isFaceUp = false
+        } else {
+            cards[index].isFaceUp = true
+        }
     }
     
     // MARK: Initializer.
