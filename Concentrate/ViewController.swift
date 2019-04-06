@@ -10,6 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    // MARK: Model
+    var game: Concentrate = Concentrate(numberOfPairsOfCards: 4)
+    
     // MARK: Properties
     @IBOutlet var cardButtons: [UIButton]!
     @IBOutlet weak var flipCountLabel: UILabel!
@@ -24,6 +27,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    // MARK: Actions
     @IBAction func touchCard(_ sender: UIButton) {
         flipCount += 1
         if let cardNumber = cardButtons.firstIndex(of: sender) {
@@ -33,6 +37,7 @@ class ViewController: UIViewController {
         }
     }
     
+    // MARK: Supporting functions
     func flipCard(withEmoji emoji: String, on button: UIButton) {
         if button.currentTitle == emoji {
             button.setTitle("", for: UIControl.State.normal)

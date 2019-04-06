@@ -12,6 +12,8 @@
 		564F308C2257613E00BE141F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564F308A2257613E00BE141F /* Main.storyboard */; };
 		564F308E2257614000BE141F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 564F308D2257614000BE141F /* Assets.xcassets */; };
 		564F30912257614000BE141F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 564F308F2257614000BE141F /* LaunchScreen.storyboard */; };
+		56A498562258A5B70034EA58 /* Concentrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A498552258A5B70034EA58 /* Concentrate.swift */; };
+		56A498582258A8930034EA58 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A498572258A8930034EA58 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		564F308D2257614000BE141F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		564F30902257614000BE141F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		564F30922257614000BE141F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		56A498552258A5B70034EA58 /* Concentrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentrate.swift; sourceTree = "<group>"; };
+		56A498572258A8930034EA58 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 			children = (
 				564F30882257613E00BE141F /* ViewController.swift */,
 				564F308A2257613E00BE141F /* Main.storyboard */,
+				56A498552258A5B70034EA58 /* Concentrate.swift */,
+				56A498572258A8930034EA58 /* Card.swift */,
 				564F3099225761ED00BE141F /* Supporting Fiels */,
 				564F30922257614000BE141F /* Info.plist */,
 			);
@@ -145,6 +151,8 @@
 			files = (
 				564F30892257613E00BE141F /* ViewController.swift in Sources */,
 				564F30872257613E00BE141F /* AppDelegate.swift in Sources */,
+				56A498562258A5B70034EA58 /* Concentrate.swift in Sources */,
+				56A498582258A8930034EA58 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
