@@ -8,15 +8,35 @@
 
 import Foundation
 
-class Concentrate {
+struct Concentrate {
     
     // MARK: Properties
-    var cards = [Card]()
+    private(set) var cards = [Card]()
     
-    var indexOfOneAndOnlyFaceUp: Int?
+    private var indexOfOneAndOnlyFaceUp: Int? {
+        get {
+            var foundIndex: Int?
+            for index in cards.indices {
+                if cards[index].isFaceUp {
+                    if foundIndex == nil {
+                        foundIndex = index
+                    } else {
+                        return nil
+                    }
+                }
+            }
+            return foundIndex
+        }
+        set {
+            for index in cards.indices {
+                cards[index].isFaceUp = (index == newValue)
+            }
+        }
+    }
     
     // MARK: Methods
-    func chooseCard(at index: Int) {
+    mutating func chooseCard(at index: Int) {
+        assert(cards.indices.contains(index), "Concentrate.chooseCrad(at: \(index)): chosen index not in the cards")
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUp, matchIndex != index {
                 if cards[index].identifier == cards[matchIndex].identifier {
@@ -24,12 +44,7 @@ class Concentrate {
                     cards[matchIndex].isMatched = true
                 }
                 cards[index].isFaceUp = true
-                indexOfOneAndOnlyFaceUp = nil
             } else {
-                for flipDownIndex in cards.indices {
-                    cards[flipDownIndex].isFaceUp = false
-                }
-                cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUp = index
             }
         }
@@ -39,11 +54,11 @@ class Concentrate {
     // This only takes the number of pairs of cards and it has to initialize `cards` with that many cards of unique identifiers.
     // ❓: Is it possible to just pass the `nubmerOfPairs...` to the Array initializer and have it take care of initializing the cards?
     init(numberOfPairsOfCards: Int) {
+        assert(numberOfPairsOfCards > 0, "Consentrate.init(\(numberOfPairsOfCards): you must have at least one pair of cards")
         for _ in 0..<numberOfPairsOfCards {
             let card = Card()
             cards += [card, card]
         }
-        print("number of cards = \(cards.count)")
         
         // TODO: Shuffle the cards.
     }
