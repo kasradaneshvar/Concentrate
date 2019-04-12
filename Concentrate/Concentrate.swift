@@ -15,17 +15,19 @@ struct Concentrate {
     
     private var indexOfOneAndOnlyFaceUp: Int? {
         get {
-            var foundIndex: Int?
-            for index in cards.indices {
-                if cards[index].isFaceUp {
-                    if foundIndex == nil {
-                        foundIndex = index
-                    } else {
-                        return nil
-                    }
-                }
-            }
-            return foundIndex
+            return cards.indices.filter { cards[$0].isFaceUp }.oneAndOnly // Extension: Collection.
+//
+//            var foundIndex: Int?
+//            for index in cards.indices {
+//                if cards[index].isFaceUp {
+//                    if foundIndex == nil {
+//                        foundIndex = index
+//                    } else {
+//                        return nil
+//                    }
+//                }
+//            }
+//            return foundIndex
         }
         set {
             for index in cards.indices {
@@ -39,7 +41,7 @@ struct Concentrate {
         assert(cards.indices.contains(index), "Concentrate.chooseCrad(at: \(index)): chosen index not in the cards")
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUp, matchIndex != index {
-                if cards[index].identifier == cards[matchIndex].identifier {
+                if cards[index] == cards[matchIndex] {
                     cards[index].isMatched = true
                     cards[matchIndex].isMatched = true
                 }
@@ -61,5 +63,11 @@ struct Concentrate {
         }
         
         // TODO: Shuffle the cards.
+    }
+}
+
+extension Collection {
+    var oneAndOnly: Element? {
+        return count == 1 ? first : nil
     }
 }

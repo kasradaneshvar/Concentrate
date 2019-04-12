@@ -9,8 +9,16 @@
 import Foundation
 
 struct Card: Hashable {
-    
-    var identifier: Int
+    // A somewhat ad-hoc implementation of `Hashable`.
+    static func == (lhs: Card, rhs: Card) -> Bool {
+        return lhs.identifier == rhs.identifier
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+    }
+
+    private var identifier: Int
     var isFaceUp = false
     var isMatched = false
     
@@ -24,5 +32,4 @@ struct Card: Hashable {
     init() {
         self.identifier = Card.getUniqueIdentifier()
     }
-    
 }
