@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ConcentrateViewController: UIViewController {
+    
     // MARK: Model
     private lazy var game: Concentrate = Concentrate(numberOfPairsOfCards: numberOfPairsOfCards)
 
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     private func updateFlipCountLabel() {
         let attributes: [NSAttributedString.Key:Any]  = [
             .strokeWidth : 5.0,
-            .strokeColor : #colorLiteral(red: 0.9850024288, green: 0.6463856413, blue: 0.001579543076, alpha: 1)
+            .strokeColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         ]
         let attributedString = NSAttributedString(string: "Flips: \(flipCount)", attributes: attributes)
         flipCountLabel.attributedText = attributedString
@@ -57,19 +57,28 @@ class ViewController: UIViewController {
 
     // MARK: Supporting functions
     private func updateViewFromModel() {
-        for index in cardButtons.indices {
-            let button = cardButtons[index]
-            let card = game.cards[index]
-            if card.isFaceUp {
-                button.setTitle(emoji(for: card), for: UIControl.State.normal)
-                button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            } else {
-                button.setTitle("", for: UIControl.State.normal)
-                button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.6000000238) : #colorLiteral(red: 0.9850024288, green: 0.6463856413, blue: 0.001579543076, alpha: 1)
+        if cardButtons != nil { // Because `prepare` does not set outlet s
+            for index in cardButtons.indices {
+                let button = cardButtons[index]
+                let card = game.cards[index]
+                if card.isFaceUp {
+                    button.setTitle(emoji(for: card), for: UIControl.State.normal)
+                    button.backgroundColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+                } else {
+                    button.setTitle("", for: UIControl.State.normal)
+                    button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.6000000238) : #colorLiteral(red: 0.4513868093, green: 0.9930960536, blue: 1, alpha: 1)
+                }
             }
         }
     }
     
+    var theme: String? {
+        didSet {
+            emojiChoices = theme ?? ""
+            emoji = [:]
+            updateViewFromModel()
+        }
+    }
     private var emojiChoices = "🎃👻🦇🙀⚰️🍬🍭😱"
 
     private var emoji = [Card:String]()
