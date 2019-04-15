@@ -57,7 +57,7 @@ class ConcentrateViewController: UIViewController {
 
     // MARK: Supporting functions
     private func updateViewFromModel() {
-        if cardButtons != nil { // Because `prepare` does not set outlet s
+        if cardButtons != nil { // Because `prepare` does not set outlets
             for index in cardButtons.indices {
                 let button = cardButtons[index]
                 let card = game.cards[index]
@@ -79,6 +79,7 @@ class ConcentrateViewController: UIViewController {
             updateViewFromModel()
         }
     }
+    // "🎃👻🦇🙀⚰️🍬🍭😱"
     private var emojiChoices = "🎃👻🦇🙀⚰️🍬🍭😱"
 
     private var emoji = [Card:String]()
