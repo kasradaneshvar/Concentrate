@@ -8,8 +8,12 @@
 
 import UIKit
 
-class ConcentrateThemeChooserViewController: UIViewController, UISplitViewControllerDelegate {
+class ConcentrateThemeChooserViewController: VCLLoggingViewController, UISplitViewControllerDelegate {
 
+    override var vclLoggingName: String {
+        return "ThemeChooser"
+    }
+    
     let themes = [
         "Sports":"⚽️🥎🏀🏓🏹🚴🏿‍♂️🏊🏿‍♂️🏸🏈🏉⛳️",
         "Animals":"🦓🦔🐇🐁🦢🐖🦈🐌🦋🐍🦙",
@@ -18,6 +22,7 @@ class ConcentrateThemeChooserViewController: UIViewController, UISplitViewContro
     
     // MARK: Don't collapse secondary in splitView
     override func awakeFromNib() {
+        super.awakeFromNib()
         splitViewController?.delegate = self
     }
     
@@ -31,8 +36,13 @@ class ConcentrateThemeChooserViewController: UIViewController, UISplitViewContro
     }
     
     // MARK: Manual segue
-    @IBAction func changeTheme(_ sender: Any) {
+    private var lastSeguedToConcentrateViewController: ConcentrateViewController?
 
+    private var splitViewDetailConcentrateViewController: ConcentrateViewController? {
+        return splitViewController?.viewControllers.last as? ConcentrateViewController
+    }
+    
+    @IBAction func changeTheme(_ sender: Any) {
         if let cvc = splitViewDetailConcentrateViewController { // Finding things in `splitView`: probably better for iPad only.
             if let themeName = (sender as? UIButton)?.currentTitle, let theme = themes[themeName] {
                 cvc.theme = theme
@@ -47,14 +57,7 @@ class ConcentrateThemeChooserViewController: UIViewController, UISplitViewContro
         }
     }
     
-    private var splitViewDetailConcentrateViewController: ConcentrateViewController? {
-        return splitViewController?.viewControllers.last as? ConcentrateViewController
-    }
-
-    private var lastSeguedToConcentrateViewController: ConcentrateViewController?
-    
     // MARK: - Navigation
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.

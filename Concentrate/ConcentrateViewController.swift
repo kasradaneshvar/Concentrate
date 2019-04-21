@@ -8,19 +8,31 @@
 
 import UIKit
 
-class ConcentrateViewController: UIViewController {
-    
+class ConcentrateViewController: VCLLoggingViewController {
+
+    override var vclLoggingName: String {
+        return "Game"
+    }
     // MARK: Model
     private lazy var game: Concentrate = Concentrate(numberOfPairsOfCards: numberOfPairsOfCards)
 
     // MARK: Properties
     var numberOfPairsOfCards: Int {
         // get {
-            return (cardButtons.count + 1) / 2
+            return (visibleCardbuttons.count + 1) / 2
         // }
     }
     
     @IBOutlet private var cardButtons: [UIButton]!
+    
+    private var visibleCardbuttons: [UIButton]! {  // For `autolayout` hiding.
+        return cardButtons?.filter { !$0.superview!.isHidden }
+    }
+    
+    override func viewDidLayoutSubviews() { // To solve an issue where hiding stacks would remove the flipped card from the new layout.
+        super.viewDidLayoutSubviews()
+        updateViewFromModel()
+    }
     
     @IBOutlet private weak var flipCountLabel: UILabel! {
         didSet {
@@ -39,14 +51,21 @@ class ConcentrateViewController: UIViewController {
             .strokeWidth : 5.0,
             .strokeColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         ]
-        let attributedString = NSAttributedString(string: "Flips: \(flipCount)", attributes: attributes)
+        let attributedString = NSAttributedString( // Edit: add `traitCollection` to have different formats for different oriantations.
+            string: traitCollection.verticalSizeClass == .compact ? "Flips:\n\(flipCount)" : "Flips: \(flipCount)",
+            attributes: attributes)
         flipCountLabel.attributedText = attributedString
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) { // ↑ That won't work unless we get notified that the `traitCollection` changed.
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateFlipCountLabel()
     }
 
     // MARK: Actions
     @IBAction private func touchCard(_ sender: UIButton) {
         flipCount += 1
-        if let cardNumber = cardButtons.firstIndex(of: sender) {
+        if let cardNumber = visibleCardbuttons.firstIndex(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
         } else {
@@ -54,12 +73,11 @@ class ConcentrateViewController: UIViewController {
         }
     }
     
-
     // MARK: Supporting functions
     private func updateViewFromModel() {
-        if cardButtons != nil { // Because `prepare` does not set outlets
-            for index in cardButtons.indices {
-                let button = cardButtons[index]
+        if visibleCardbuttons != nil { // Because `prepare` does not set outlets
+            for index in visibleCardbuttons.indices {
+                let button = visibleCardbuttons[index]
                 let card = game.cards[index]
                 if card.isFaceUp {
                     button.setTitle(emoji(for: card), for: UIControl.State.normal)
@@ -79,7 +97,7 @@ class ConcentrateViewController: UIViewController {
             updateViewFromModel()
         }
     }
-    // "🎃👻🦇🙀⚰️🍬🍭😱"
+
     private var emojiChoices = "🎃👻🦇🙀⚰️🍬🍭😱"
 
     private var emoji = [Card:String]()

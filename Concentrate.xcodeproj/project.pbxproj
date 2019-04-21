@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5610CB212268B7B80034C888 /* VCLLoggingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5610CB202268B7B80034C888 /* VCLLoggingViewController.swift */; };
 		5623B4482263AC2C002944B8 /* ConcentrateThemeChooserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5623B4472263AC2C002944B8 /* ConcentrateThemeChooserViewController.swift */; };
 		564F30872257613E00BE141F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F30862257613E00BE141F /* AppDelegate.swift */; };
 		564F30892257613E00BE141F /* ConcentrateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F30882257613E00BE141F /* ConcentrateViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5610CB202268B7B80034C888 /* VCLLoggingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCLLoggingViewController.swift; sourceTree = "<group>"; };
 		5623B4472263AC2C002944B8 /* ConcentrateThemeChooserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcentrateThemeChooserViewController.swift; sourceTree = "<group>"; };
 		564F30832257613E00BE141F /* Concentrate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Concentrate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		564F30862257613E00BE141F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 		564F30852257613E00BE141F /* Concentrate */ = {
 			isa = PBXGroup;
 			children = (
+				5610CB202268B7B80034C888 /* VCLLoggingViewController.swift */,
 				5623B4472263AC2C002944B8 /* ConcentrateThemeChooserViewController.swift */,
 				564F30882257613E00BE141F /* ConcentrateViewController.swift */,
 				564F308A2257613E00BE141F /* Main.storyboard */,
@@ -152,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5610CB212268B7B80034C888 /* VCLLoggingViewController.swift in Sources */,
 				564F30892257613E00BE141F /* ConcentrateViewController.swift in Sources */,
 				564F30872257613E00BE141F /* AppDelegate.swift in Sources */,
 				56A498562258A5B70034EA58 /* Concentrate.swift in Sources */,
